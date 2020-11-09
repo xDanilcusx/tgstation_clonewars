@@ -249,7 +249,7 @@ Auto Patrol: []"},
 		return
 	if(iscarbon(A))
 		var/mob/living/carbon/C = A
-		if(!C.IsParalyzed() || arrest_type)
+		if(arrest_type)
 			if(!check_nap_violations())
 				stun_attack(A, TRUE)
 			else
