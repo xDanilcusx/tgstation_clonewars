@@ -2,6 +2,14 @@
 	projectile_type = /obj/projectile/beam/laser
 	select_name = "kill"
 
+/obj/item/ammo_casing/energy/laser/republic
+	projectile_type = /obj/projectile/beam/laser
+	select_name = "kill"
+
+/obj/item/ammo_casing/energy/laser/republic/minigun
+	projectile_type = /obj/projectile/beam/laser/republic/minigun
+	e_cost = 20
+
 /obj/item/ammo_casing/energy/laser/hellfire
 	projectile_type = /obj/projectile/beam/laser/hellfire
 	e_cost = 130
