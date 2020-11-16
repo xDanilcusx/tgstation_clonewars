@@ -119,6 +119,18 @@
 	sword_color = "red"
 	var/hitcost = 50
 
+/obj/item/melee/transforming/energy/sword/sith
+	sword_color = "red"
+
+/obj/item/melee/transforming/energy/sword/jedi
+	sword_color = "blue"
+
+/obj/item/melee/transforming/energy/sword/green
+	sword_color = "green"
+
+/obj/item/melee/transforming/energy/sword/purple
+	sword_color = "purple"
+
 /obj/item/melee/transforming/energy/sword/cyborg/attack(mob/M, mob/living/silicon/robot/R)
 	if(R.cell)
 		var/obj/item/stock_parts/cell/C = R.cell

@@ -30,13 +30,13 @@
 	results = list(/datum/reagent/medicine/salglu_solution = 3)
 	required_reagents = list(/datum/reagent/consumable/salt = 1, /datum/reagent/water = 1, /datum/reagent/consumable/sugar = 1)
 
-/datum/chemical_reaction/mine_salve
-	results = list(/datum/reagent/medicine/mine_salve = 3)
-	required_reagents = list(/datum/reagent/fuel/oil = 1, /datum/reagent/water = 1, /datum/reagent/iron = 1)
+///datum/chemical_reaction/mine_salve
+//	results = list(/datum/reagent/medicine/mine_salve = 3)
+//	required_reagents = list(/datum/reagent/fuel/oil = 1, /datum/reagent/water = 1, /datum/reagent/iron = 1)
 
-/datum/chemical_reaction/mine_salve2
-	results = list(/datum/reagent/medicine/mine_salve = 15)
-	required_reagents = list(/datum/reagent/toxin/plasma = 5, /datum/reagent/iron = 5, /datum/reagent/consumable/sugar = 1) // A sheet of plasma, a twinkie and a sheet of metal makes four of these
+///datum/chemical_reaction/mine_salve2
+//	results = list(/datum/reagent/medicine/mine_salve = 15)
+//	required_reagents = list(/datum/reagent/toxin/plasma = 5, /datum/reagent/iron = 5, /datum/reagent/consumable/sugar = 1) // A sheet of plasma, a twinkie and a sheet of metal makes four of these
 
 /datum/chemical_reaction/synthflesh
 	results = list(/datum/reagent/medicine/c2/synthflesh = 3)
@@ -111,8 +111,8 @@
 	required_reagents = list(/datum/reagent/consumable/ethanol = 1, /datum/reagent/medicine/c2/multiver = 1, /datum/reagent/copper = 1)
 
 /datum/chemical_reaction/cryoxadone
-	results = list(/datum/reagent/medicine/cryoxadone = 3)
-	required_reagents = list(/datum/reagent/stable_plasma = 1, /datum/reagent/acetone = 1, /datum/reagent/toxin/mutagen = 1)
+	results = list(/datum/reagent/medicine/cryoxadone = 4)
+	required_reagents = list(/datum/reagent/medicine/omnizine = 1, /datum/reagent/medicine/salbutamol = 1, /datum/reagent/acetone = 1, /datum/reagent/toxin/mutagen = 1)
 
 /datum/chemical_reaction/pyroxadone
 	results = list(/datum/reagent/medicine/pyroxadone = 2)

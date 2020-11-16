@@ -45,9 +45,9 @@
 			sanitization += 0.9
 		if(victim.has_reagent(/datum/reagent/space_cleaner/sterilizine/))
 			sanitization += 0.9
-		if(victim.has_reagent(/datum/reagent/medicine/mine_salve))
-			sanitization += 0.3
-			flesh_healing += 0.5
+//		if(victim.has_reagent(/datum/reagent/medicine/mine_salve))
+//			sanitization += 0.3
+//			flesh_healing += 0.5
 
 	if(limb.current_gauze)
 		limb.seep_gauze(WOUND_BURN_SANITIZATION_RATE)

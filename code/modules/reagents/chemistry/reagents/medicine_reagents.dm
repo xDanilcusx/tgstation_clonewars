@@ -137,7 +137,7 @@
 	..()
 
 /datum/reagent/medicine/cryoxadone
-	name = "Cryoxadone"
+	name = "Bacta"
 	description = "A chemical mixture with almost magical healing powers. Its main limitation is that the patient's body temperature must be under 270K for it to metabolise correctly."
 	color = "#0000C8"
 	taste_description = "sludge"
@@ -252,17 +252,18 @@
 
 /datum/reagent/medicine/oxandrolone
 	name = "Oxandrolone"
-	description = "Stimulates the healing of severe burns. Extremely rapidly heals severe burns and slowly heals minor ones. Overdose will worsen existing burns."
+	description = "Stimulates the healing of severe burns. Extremely rapidly heals severe burns and slowly heals minor ones. Works only in cold environment. Overdose will worsen existing burns."
 	reagent_state = LIQUID
 	color = "#1E8BFF"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	overdose_threshold = 25
 
 /datum/reagent/medicine/oxandrolone/on_mob_life(mob/living/carbon/M)
-	if(M.getFireLoss() > 25)
-		M.adjustFireLoss(-4*REM, 0) //Twice as effective as AIURI for severe burns
-	else
-		M.adjustFireLoss(-0.5*REM, 0) //But only a quarter as effective for more minor ones
+	if(M.bodytemperature < T0C)
+		if(M.getFireLoss() > 25)
+			M.adjustFireLoss(-4*REM, 0) //Twice as effective as AIURI for severe burns
+		else
+			M.adjustFireLoss(-0.5*REM, 0) //But only a quarter as effective for more minor ones
 	..()
 	. = 1
 
@@ -314,47 +315,47 @@
 		. = TRUE
 	..()
 
-/datum/reagent/medicine/mine_salve
-	name = "Miner's Salve"
-	description = "A powerful painkiller. Restores bruising and burns in addition to making the patient believe they are fully healed. Also great for treating severe burn wounds in a pinch."
-	reagent_state = LIQUID
-	color = "#6D6374"
-	metabolization_rate = 0.4 * REAGENTS_METABOLISM
+///datum/reagent/medicine/mine_salve
+//	name = "Miner's Salve"
+//	description = "A powerful painkiller. Restores bruising and burns in addition to making the patient believe they are fully healed. Also great for treating severe burn wounds in a pinch."
+//	reagent_state = LIQUID
+//	color = "#6D6374"
+//	metabolization_rate = 0.4 * REAGENTS_METABOLISM
 
-/datum/reagent/medicine/mine_salve/on_mob_life(mob/living/carbon/C)
-	C.hal_screwyhud = SCREWYHUD_HEALTHY
-	C.adjustBruteLoss(-0.25*REM, 0)
-	C.adjustFireLoss(-0.25*REM, 0)
-	..()
-	return TRUE
+///datum/reagent/medicine/mine_salve/on_mob_life(mob/living/carbon/C)
+//	C.hal_screwyhud = SCREWYHUD_HEALTHY
+//	C.adjustBruteLoss(-0.25*REM, 0)
+//	C.adjustFireLoss(-0.25*REM, 0)
+//	..()
+//	return TRUE
 
-/datum/reagent/medicine/mine_salve/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume, show_message = TRUE)
-	. = ..()
-	if(!iscarbon(exposed_mob) || (exposed_mob.stat == DEAD))
-		return
+///datum/reagent/medicine/mine_salve/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume, show_message = TRUE)
+//	. = ..()
+//	if(!iscarbon(exposed_mob) || (exposed_mob.stat == DEAD))
+//		return
+//
+//	if(methods & (INGEST|VAPOR|INJECT))
+//		exposed_mob.adjust_nutrition(-5)
+//		if(show_message)
+//			to_chat(exposed_mob, "<span class='warning'>Your stomach feels empty and cramps!</span>")
+//
+//	if(methods & (PATCH|TOUCH))
+//		var/mob/living/carbon/exposed_carbon = exposed_mob
+//		for(var/s in exposed_carbon.surgeries)
+//			var/datum/surgery/surgery = s
+//			surgery.speed_modifier = max(0.1, surgery.speed_modifier)
+//
+//		if(show_message)
+//			to_chat(exposed_carbon, "<span class='danger'>You feel your injuries fade away to nothing!</span>" )
 
-	if(methods & (INGEST|VAPOR|INJECT))
-		exposed_mob.adjust_nutrition(-5)
-		if(show_message)
-			to_chat(exposed_mob, "<span class='warning'>Your stomach feels empty and cramps!</span>")
-
-	if(methods & (PATCH|TOUCH))
-		var/mob/living/carbon/exposed_carbon = exposed_mob
-		for(var/s in exposed_carbon.surgeries)
-			var/datum/surgery/surgery = s
-			surgery.speed_modifier = max(0.1, surgery.speed_modifier)
-
-		if(show_message)
-			to_chat(exposed_carbon, "<span class='danger'>You feel your injuries fade away to nothing!</span>" )
-
-/datum/reagent/medicine/mine_salve/on_mob_end_metabolize(mob/living/M)
-	if(iscarbon(M))
-		var/mob/living/carbon/N = M
-		N.hal_screwyhud = SCREWYHUD_NONE
-	..()
-
+///datum/reagent/medicine/mine_salve/on_mob_end_metabolize(mob/living/M)
+//	if(iscarbon(M))
+//		var/mob/living/carbon/N = M
+//		N.hal_screwyhud = SCREWYHUD_NONE
+//	..()
+//
 /datum/reagent/medicine/omnizine
-	name = "Omnizine"
+	name = "Ambori"
 	description = "Slowly heals all damage types. Overdose will cause damage in all types instead."
 	reagent_state = LIQUID
 	color = "#DCDCDC"
@@ -380,7 +381,7 @@
 
 /datum/reagent/medicine/omnizine/protozine
 	name = "Protozine"
-	description = "A less environmentally friendly and somewhat weaker variant of omnizine."
+	description = "A less environmentally friendly and somewhat weaker variant of Ambori."
 	color = "#d8c7b7"
 	healing = 0.2
 
@@ -414,23 +415,26 @@
 
 /datum/reagent/medicine/pen_acid
 	name = "Pentetic Acid"
-	description = "Reduces massive amounts of radiation and toxin damage while purging other chemicals from the body."
+	description = "Reduces massive amounts of radiation and toxin damage while purging other chemicals from the body. Works only in cold environment."
 	reagent_state = LIQUID
 	color = "#E6FFF0"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 
 /datum/reagent/medicine/pen_acid/on_mob_life(mob/living/carbon/M)
-	M.radiation -= max(M.radiation-RAD_MOB_SAFE, 0)/50
-	M.adjustToxLoss(-2*REM, 0)
-	for(var/datum/reagent/R in M.reagents.reagent_list)
-		if(R != src)
-			M.reagents.remove_reagent(R.type,2)
-	..()
-	. = 1
+	if(M.bodytemperature < T0C)
+		M.radiation -= max(M.radiation-RAD_MOB_SAFE, 0)/50
+		M.adjustToxLoss(-2*REM, 0)
+		for(var/datum/reagent/R in M.reagents.reagent_list)
+			if(R != src)
+				M.reagents.remove_reagent(R.type,2)
+
+		. = 1
+		..()
+
 
 /datum/reagent/medicine/sal_acid
 	name = "Salicylic Acid"
-	description = "Stimulates the healing of severe bruises. Extremely rapidly heals severe bruising and slowly heals minor ones. Overdose will worsen existing bruising."
+	description = "Stimulates the healing of severe bruises, that works only in cold environment. Extremely rapidly heals severe bruising and slowly heals minor ones. Overdose will worsen existing bruising."
 	reagent_state = LIQUID
 	color = "#D2D2D2"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
@@ -451,16 +455,17 @@
 	..()
 
 /datum/reagent/medicine/salbutamol
-	name = "Salbutamol"
+	name = "Kavam"
 	description = "Rapidly restores oxygen deprivation as well as preventing more of it to an extent."
 	reagent_state = LIQUID
 	color = "#00FFFF"
 	metabolization_rate = 0.25 * REAGENTS_METABOLISM
 
 /datum/reagent/medicine/salbutamol/on_mob_life(mob/living/carbon/M)
-	M.adjustOxyLoss(-3*REM, 0)
-	if(M.losebreath >= 4)
-		M.losebreath -= 2
+	if(M.bodytemperature < T0C)
+		M.adjustOxyLoss(-3*REM, 0)
+		if(M.losebreath >= 4)
+			M.losebreath -= 2
 	..()
 	. = 1
 
@@ -645,39 +650,41 @@
 
 /datum/reagent/medicine/oculine
 	name = "Oculine"
-	description = "Quickly restores eye damage, cures nearsightedness, and has a chance to restore vision to the blind."
+	description = "Quickly restores eye damage, cures nearsightedness, and has a chance to restore vision to the blind. Works only in cold environment."
 	reagent_state = LIQUID
 	color = "#404040" //oculine is dark grey, inacusiate is light grey
 	metabolization_rate = 0.25 * REAGENTS_METABOLISM
 	taste_description = "dull toxin"
 
 /datum/reagent/medicine/oculine/on_mob_life(mob/living/carbon/M)
-	var/obj/item/organ/eyes/eyes = M.getorganslot(ORGAN_SLOT_EYES)
-	M.adjust_blindness(-2)
-	M.adjust_blurriness(-2)
-	if (!eyes)
-		return
-	eyes.applyOrganDamage(-2)
-	if(HAS_TRAIT_FROM(M, TRAIT_BLIND, EYE_DAMAGE))
-		if(prob(20))
-			to_chat(M, "<span class='warning'>Your vision slowly returns...</span>")
-			M.cure_blind(EYE_DAMAGE)
+	if(M.bodytemperature < T0C)
+		var/obj/item/organ/eyes/eyes = M.getorganslot(ORGAN_SLOT_EYES)
+		M.adjust_blindness(-2)
+		M.adjust_blurriness(-2)
+		if (!eyes)
+			return
+		eyes.applyOrganDamage(-2)
+		if(HAS_TRAIT_FROM(M, TRAIT_BLIND, EYE_DAMAGE))
+			if(prob(20))
+				to_chat(M, "<span class='warning'>Your vision slowly returns...</span>")
+				M.cure_blind(EYE_DAMAGE)
+				M.cure_nearsighted(EYE_DAMAGE)
+				M.blur_eyes(35)
+		else if(HAS_TRAIT_FROM(M, TRAIT_NEARSIGHT, EYE_DAMAGE))
+			to_chat(M, "<span class='warning'>The blackness in your peripheral vision fades.</span>")
 			M.cure_nearsighted(EYE_DAMAGE)
-			M.blur_eyes(35)
-	else if(HAS_TRAIT_FROM(M, TRAIT_NEARSIGHT, EYE_DAMAGE))
-		to_chat(M, "<span class='warning'>The blackness in your peripheral vision fades.</span>")
-		M.cure_nearsighted(EYE_DAMAGE)
-		M.blur_eyes(10)
+			M.blur_eyes(10)
 	..()
 
 /datum/reagent/medicine/inacusiate
 	name = "Inacusiate"
-	description = "Rapidly repairs damage to the patient's ears to cure deafness, assuming the source of said deafness isn't from genetic mutations, chronic deafness, or a total defecit of ears." //by "chronic" deafness, we mean people with the "deaf" quirk
+	description = "Rapidly repairs damage to the patient's ears to cure deafness, assuming the source of said deafness isn't from genetic mutations, chronic deafness, or a total defecit of ears. Works only in cold environment." //by "chronic" deafness, we mean people with the "deaf" quirk
 	color = "#606060" // ditto
 
 /datum/reagent/medicine/inacusiate/on_mob_life(mob/living/carbon/M)
-	var/obj/item/organ/ears/ears = M.getorganslot(ORGAN_SLOT_EARS)
-	ears.adjustEarDamage(-4, -4)
+	if(M.bodytemperature < T0C)
+		var/obj/item/organ/ears/ears = M.getorganslot(ORGAN_SLOT_EARS)
+		ears.adjustEarDamage(-4, -4)
 	..()
 
 /datum/reagent/medicine/atropine
@@ -802,37 +809,41 @@
 
 /datum/reagent/medicine/mannitol
 	name = "Mannitol"
-	description = "Efficiently restores brain damage."
+	description = "Efficiently restores brain damage. Works only in cold environment."
 	color = "#A0A0A0" //mannitol is light grey, neurine is lighter grey
 
 /datum/reagent/medicine/mannitol/on_mob_life(mob/living/carbon/C)
-	C.adjustOrganLoss(ORGAN_SLOT_BRAIN, -2*REM)
+	if(C.bodytemperature < T0C)
+		C.adjustOrganLoss(ORGAN_SLOT_BRAIN, -2*REM)
 	..()
 
 //Having mannitol in you will pause the brain damage from brain tumor (so it heals an even 2 brain damage instead of 1.8)
 /datum/reagent/medicine/mannitol/on_mob_metabolize(mob/living/carbon/C)
 	. = ..()
-	ADD_TRAIT(C, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
+	if(C.bodytemperature < T0C)
+		ADD_TRAIT(C, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 
 /datum/reagent/medicine/mannitol/on_mob_end_metabolize(mob/living/carbon/C)
-	REMOVE_TRAIT(C, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
+	if(C.bodytemperature < T0C)
+		REMOVE_TRAIT(C, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 	. = ..()
 
 /datum/reagent/medicine/neurine
 	name = "Neurine"
-	description = "Reacts with neural tissue, helping reform damaged connections. Can cure minor traumas."
+	description = "Reacts with neural tissue, helping reform damaged connections. Can cure minor traumas. Works only in cold environment."
 	color = "#C0C0C0" //ditto
 
 /datum/reagent/medicine/neurine/on_mob_life(mob/living/carbon/C)
-	if(C.has_reagent(/datum/reagent/consumable/ethanol/neurotoxin))
-		C.remove_reagent(/datum/reagent/consumable/ethanol/neurotoxin, 5)
-	if(prob(15))
-		C.cure_trauma_type(resilience = TRAUMA_RESILIENCE_BASIC)
-	..()
+	if(C.bodytemperature < T0C)
+		if(C.has_reagent(/datum/reagent/consumable/ethanol/neurotoxin))
+			C.remove_reagent(/datum/reagent/consumable/ethanol/neurotoxin, 5)
+		if(prob(15))
+			C.cure_trauma_type(resilience = TRAUMA_RESILIENCE_BASIC)
+		..()
 
 /datum/reagent/medicine/mutadone
 	name = "Mutadone"
-	description = "Removes jitteriness and restores genetic defects."
+	description = "Removes jitteriness and restores genetic defects. Works only in cold environment."
 	color = "#5096C8"
 	taste_description = "acid"
 
