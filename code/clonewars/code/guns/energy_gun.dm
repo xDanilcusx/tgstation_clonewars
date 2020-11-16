@@ -41,20 +41,19 @@
 /obj/item/gun/energy/e_gun/e_gun/e_gun_z6
 	name = "Z-6 Rotary Cannon"
 	desc = "Heavy breach weapon with one, and only one purpose - KILL!"
-	icon_state = "energy-a"
+	icon_state = "z-6"
 	inhand_icon_state = "starwars"
 	w_class = WEIGHT_CLASS_HUGE
 	select = 1
 	automatic = 1
 	burst_size = 1
-	fire_delay = 1
 	ammo_type = list(/obj/item/ammo_casing/energy/laser/republic/minigun)
 	can_flashlight = TRUE
 	throwforce = 20
 	ammo_x_offset = 99
 	dual_wield_spread = 80
 	selfcharge = 1
-	charge_delay = 3
+	charge_delay = 5
 	spread = 20
 
 /obj/item/gun/energy/e_gun/e_gun/e_gun_z6/ComponentInitialize()

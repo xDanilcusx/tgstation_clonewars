@@ -8,7 +8,7 @@
 
 /obj/item/ammo_casing/energy/laser/republic/minigun
 	projectile_type = /obj/projectile/beam/laser/republic/minigun
-	e_cost = 20
+	e_cost = 35
 
 /obj/item/ammo_casing/energy/laser/hellfire
 	projectile_type = /obj/projectile/beam/laser/hellfire

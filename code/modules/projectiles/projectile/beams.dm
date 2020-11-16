@@ -38,7 +38,7 @@
 	bare_wound_bonus = 40
 
 /obj/projectile/beam/laser/republic/minigun
-	damage = 30
+	damage = 25
 	wound_bonus = -20
 	bare_wound_bonus = 10
 
