@@ -252,11 +252,10 @@
 
 /datum/reagent/medicine/oxandrolone
 	name = "Oxandrolone"
-	description = "Stimulates the healing of severe burns. Extremely rapidly heals severe burns and slowly heals minor ones. Works only in cold environment. Overdose will worsen existing burns."
+	description = "Stimulates the healing of severe burns. Extremely rapidly heals severe burns and slowly heals minor ones. Works only in cold environment."
 	reagent_state = LIQUID
 	color = "#1E8BFF"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
-	overdose_threshold = 25
 
 /datum/reagent/medicine/oxandrolone/on_mob_life(mob/living/carbon/M)
 	if(M.bodytemperature < T0C)
@@ -266,12 +265,6 @@
 			M.adjustFireLoss(-0.5*REM, 0) //But only a quarter as effective for more minor ones
 	..()
 	. = 1
-
-/datum/reagent/medicine/oxandrolone/overdose_process(mob/living/M)
-	if(M.getFireLoss()) //It only makes existing burns worse
-		M.adjustFireLoss(4.5*REM, FALSE, FALSE, BODYPART_ORGANIC) // it's going to be healing either 4 or 0.5
-		. = 1
-	..()
 
 /datum/reagent/medicine/salglu_solution
 	name = "Saline-Glucose Solution"
@@ -434,11 +427,10 @@
 
 /datum/reagent/medicine/sal_acid
 	name = "Salicylic Acid"
-	description = "Stimulates the healing of severe bruises, that works only in cold environment. Extremely rapidly heals severe bruising and slowly heals minor ones. Overdose will worsen existing bruising."
+	description = "Stimulates the healing of severe bruises. Extremely rapidly heals severe bruising and slowly heals minor ones. Works only in cold environment"
 	reagent_state = LIQUID
 	color = "#D2D2D2"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
-	overdose_threshold = 25
 
 /datum/reagent/medicine/sal_acid/on_mob_life(mob/living/carbon/M)
 	if(M.getBruteLoss() > 25)
@@ -447,12 +439,6 @@
 		M.adjustBruteLoss(-0.5*REM, 0)
 	..()
 	. = 1
-
-/datum/reagent/medicine/sal_acid/overdose_process(mob/living/M)
-	if(M.getBruteLoss()) //It only makes existing bruises worse
-		M.adjustBruteLoss(4.5*REM, FALSE, FALSE, BODYPART_ORGANIC) // it's going to be healing either 4 or 0.5
-		. = 1
-	..()
 
 /datum/reagent/medicine/salbutamol
 	name = "Kavam"
