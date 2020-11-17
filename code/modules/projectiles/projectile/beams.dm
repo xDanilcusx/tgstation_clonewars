@@ -34,8 +34,6 @@
 	tracer_type = /obj/effect/projectile/tracer/disabler
 	muzzle_type = /obj/effect/projectile/muzzle/disabler
 	impact_type = /obj/effect/projectile/impact/disabler
-	wound_bonus = -30
-	bare_wound_bonus = 40
 
 /obj/projectile/beam/laser/republic/minigun
 	damage = 25

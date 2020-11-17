@@ -251,6 +251,7 @@
 #include "code\_onclick\hud\robot.dm"
 #include "code\_onclick\hud\screen_objects.dm"
 #include "code\_onclick\hud\swarmer.dm"
+#include "code\clonewars\code\species.dm"
 #include "code\clonewars\code\clothing\spacesuits\clone.dm"
 #include "code\clonewars\code\guns\energy_gun.dm"
 #include "code\controllers\admin.dm"

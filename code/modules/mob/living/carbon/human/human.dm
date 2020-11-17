@@ -1344,6 +1344,9 @@
 /mob/living/carbon/human/species/synth
 	race = /datum/species/synth
 
+/mob/living/carbon/human/species/b1
+	race = /datum/species/b1
+
 /mob/living/carbon/human/species/synth/military
 	race = /datum/species/synth/military
 
